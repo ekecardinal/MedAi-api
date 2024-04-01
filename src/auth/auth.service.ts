@@ -39,7 +39,8 @@ export class AuthService {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await this.userModel.create({
-      data: { ...createAuthDto, password: hashedPassword },
+      ...createAuthDto,
+      password: hashedPassword,
     });
 
     const token = this.jwtService.sign({ id: user.id });
@@ -96,7 +97,7 @@ export class AuthService {
         message: 'Login successful',
       };
     } else {
-      const user = await this.walletModel.create(walletLogin);
+      const user = await this.walletModel.create({ ...walletLogin });
       const token = this.jwtService.sign({ id: user.id });
       return { token, user: { name: user.name }, message: 'Login successful' };
     }

@@ -43,6 +43,7 @@ export class AuthController {
     return await this.authService.walletLogin(walletLogin);
   }
 
+  @UseGuards(AuthenticationGuard)
   @Put('wallet-update')
   async walletUpdate(@Body() wallet: WalletLoginUpdateDto, @Req() { token }) {
     return await this.authService.updateWallet(wallet, token.id);
