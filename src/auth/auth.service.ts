@@ -104,10 +104,7 @@ export class AuthService {
   }
 
   async updateWallet(wallet: WalletLoginUpdateDto, id: string) {
-    return await this.walletModel.findByIdAndUpdate(
-      { id: id },
-      { name: wallet.name },
-    );
+    return await this.walletModel.findByIdAndUpdate(id, wallet);
   }
 
   async findAll() {
